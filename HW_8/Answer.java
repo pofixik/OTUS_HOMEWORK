@@ -1,13 +1,12 @@
 package HW_8;
 
 class Answer {
-    char id;
-    String description;
-    boolean rightAnswer;
-
-    public Answer(char id, String description) {
-        this.id = id;
-        this.description = description;
-     }
+   private String text;
+    public Answer(String text){
+        this.text = text;
+    }
+    public  void showText() {
+        System.out.println(text);
+    }
 
     }
