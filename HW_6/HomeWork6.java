@@ -40,36 +40,44 @@ public class HomeWork6 {
         int[] correctAnswers ={3,5,9,14};
 
         Scanner scanner = new Scanner(System.in);
-        int k=0;//работает только если у каждого вопроса по 4 ответа
-        int step=4;//шаг для выборки ответов
 
-        for(int i = 0; i < questions.length ; i++) {
-            System.out.println(questions[i]);
+        int step=4;//шаг для выборки
+        int k=step;//работает только если у каждого вопроса по 4 ответа
+        int currentAnswer=0;
+        int currentQuestion=0;
+
+        while (currentQuestion<questions.length) {
+            System.out.println(questions[currentQuestion]);
             System.out.println("Варианты ответов:");
-            for (int h = k; h < step; h++) {
-                for (int j = 0; j < answerOptions[h].length; j++) {
-                    System.out.print(answerOptions[h][j] + " "); // обращение к конкретному элементу по индексу
 
+            while (currentAnswer < k) {
+                System.out.print(answerOptions[currentAnswer][0] + answerOptions[currentAnswer][1] + " "); // обращение к конкретному элементу по индексу
+                System.out.println();
+                currentAnswer++;
+            }
+            k = k + step;
+            System.out.print("Введите ответ: ");
+            String ansS = scanner.nextLine();
+            if (ansS.matches("-?\\d+(\\.\\d+)?")) { //проверили, что введено число
+                int ans = Integer.parseInt(ansS);
+                System.out.println("Ваш ответ: " + ans);
+
+
+                if (answerOptions[ans - 1][0].equals(answerOptions[correctAnswers[currentQuestion]][0])) {
+                    System.out.println("Верно!");
+                    correctCount++;
+                } else {
+                    System.out.println("Ну как же так?:(");
+                    wrongCount++;
                 }
+
                 System.out.println();
             }
-            step=step+4;
-            k=k+4;
-            System.out.print("Введите ответ: ");
-            int ans=Integer.parseInt(scanner.nextLine());
-            System.out.println("Ваш ответ: "+ans);
-
-
-            if (answerOptions[ans-1][0].equals(answerOptions[correctAnswers[i]][0])){
-                System.out.println("Верно!");
-                correctCount++;
-            }
             else {
-                System.out.println("Ну как же так?:(");
+                System.out.println("Вы ввели что-то не то， неверно");
                 wrongCount++;
             }
-
-            System.out.println();
+            currentQuestion++;
         }
 
         //Выводим общий результат
