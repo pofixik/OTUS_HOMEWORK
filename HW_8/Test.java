@@ -2,19 +2,27 @@ package HW_8;
 
 public class Test {
     private TestElement[] questions;
-    private int rightAnswersCount;
-
+    private int rightAnswersCount=0;
+    private int wrongAnswersCount=0;
+    int count=0;
     public TestElement[] getQuestions() {
         return questions;
     }
 
-
+    public void addTestElement(TestElement newTestElement,String question, int max, int rightAnswerIndex) {
+        newTestElement.setTestElement(question,max,rightAnswerIndex);
+        newTestElement.setTest(this);
+        questions[count++]=newTestElement;
+    }
     public void passTest(Test test){
 
         for (int i=0;i< questions.length;i++){
             test.questions[i].ask();
-
+            if (test.questions[i].readAndCheckAnswer())
+                rightAnswersCount++;
+            else wrongAnswersCount++;
         }
+        System.out.println("Результат: правильно " + rightAnswersCount + ", неправильно " + wrongAnswersCount);
     }
 
     public void prepareTest(){
@@ -51,17 +59,11 @@ public class Test {
 
 
 
-    int correctCount = 0, wrongCount = 0;
-    public static void main(String[] args) {
+      public static void main(String[] args) {
 
         Test myTest=new Test();
         myTest.prepareTest();
         myTest.passTest(myTest);
-
-
-
-
-
 
     }
 
