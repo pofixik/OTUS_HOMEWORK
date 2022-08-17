@@ -19,14 +19,12 @@ public class CollectionForBubble {
         System.out.println("Сортировка коллекцией");
         CheckTime ch=new CheckTime();
         Timestamp t1=ch.CheckTime();
-    Collections.sort(list);
+        Collections.sort(list);
         Timestamp t2=ch.CheckTime();
         System.out.println("Время сортировки: "+ (t2.getTime()-t1.getTime()));
     }
     public void print() {
-
-            System.out.print(collectionForBubble+ "");   //вывести в консоль
-
+        System.out.print(collectionForBubble+ "");   //вывести в консоль
         System.out.println();
     }
 }
