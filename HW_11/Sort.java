@@ -15,25 +15,21 @@ public class Sort {
 
     public static void main(String[] args) {
         Sort s= new Sort();
-          ArrayForBubble ar = new ArrayForBubble(10000);
-          ar.fillRandom();
-          CollectionForBubble col= new CollectionForBubble();
-          col.setCollectionForBubble(10000);
+        int max=10000;
+        ArrayForBubble ar = new ArrayForBubble(max);
+        ar.fillRandom();
 
-          ar.print();
+        CollectionForBubble col= new CollectionForBubble();
+        col.setCollectionForBubble(max);
 
-          ar.sort();
-
-          ar.print();
-
-
-        col.print();
-
-        col.sortCollectionForBubble(col.collectionForBubble);
-
-        col.print();
+        ar.print();//первоначальный массив
+        ar.sort();//отстортировали
+        ar.print();//вывели
 
 
+        col.print();//первоначальный лист
+        col.sortCollectionForBubble(col.collectionForBubble);//отстортировали
+        col.print();//вывели
 
     }
 }
