@@ -1,51 +1,38 @@
 package HW_11;
 
-import java.util.Random;
 
-class ArrayForBubble {
-    private int[] massive;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
 
-    public ArrayForBubble(int elements) {
-        massive = new int[elements];
-
-    }
-    public void fillRandom(){
-        Random random = new Random();
-        for (int i = 0; i < massive.length; i++)
-            massive[i]=random.nextInt(5000);
-    }
+import static java.util.Collections.*;
 
 
-    public void swap(int a, int b) {
-        int temp = massive[a];
-        massive[a] = massive[b];
-        massive[b] = temp;
-    }
-
-    public void sort() {
-        for (int i = massive.length - 1; i >= 1; i--) {  //Внешний цикл
-            for (int j = 0; j < i; j++) {       //Внутренний цикл
-                if (massive[j] > massive[j + 1])
-                    swap(j, j+1);
-            }
-        }
-    }
-
-    public void print() {
-        for (int a:massive) {    //для каждого элемента в массиве
-            System.out.print(a + " ");   //вывести в консоль
-
-        }
-        System.out.println();
-    }
-}
 public class Sort {
+
+
+
     public static void main(String[] args) {
-      ArrayForBubble ar = new ArrayForBubble(1000);
-      ar.fillRandom();
-      ar.print();
-      ar.sort();
-      ar.print();
+        Sort s= new Sort();
+          ArrayForBubble ar = new ArrayForBubble(10000);
+          ar.fillRandom();
+          CollectionForBubble col= new CollectionForBubble();
+          col.setCollectionForBubble(10000);
+
+          ar.print();
+
+          ar.sort();
+
+          ar.print();
+
+
+        col.print();
+
+        col.sortCollectionForBubble(col.collectionForBubble);
+
+        col.print();
+
 
 
     }
