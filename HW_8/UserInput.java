@@ -3,7 +3,7 @@ package HW_8;
 import java.util.Scanner;
 
 public interface UserInput {
-     static String read(String message){
+     default String read(){
          Scanner scanner = new Scanner(System.in);
          String userInput=scanner.nextLine();
         return userInput;
