@@ -8,6 +8,8 @@ public class TestElement {
     private int rightAnswerIndex;
     private String question;
 
+    private final UserInput userInput= new ConsoleUserInput();
+    private final UserOutput userOutput= new ConsoleUserOutput();
     int count=0;
 
     public TestElement(String question, int max, int rightAnswerIndex){
@@ -35,7 +37,6 @@ public class TestElement {
     }
     public void addAnswer(Answer newAnswer, String text) {
         newAnswer.setAnswer(text);
-        newAnswer.setTestElement(this);
         answers[count++]=newAnswer;
     }
 
@@ -48,14 +49,7 @@ public class TestElement {
         }
     }
     public boolean readAndCheckAnswer(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите ответ: ");
-        String s;
-        s=scanner.nextLine();
-        while (!s.matches("-?\\d+(\\.\\d+)?")){
-            System.out.println("Что-то не то. Попробуйте еще раз");
-            s = scanner.nextLine();
-        }
+       String s=userInput.read();
 
         if (String.valueOf(rightAnswerIndex).equals(s)) {
             System.out.println("Верно!");
@@ -70,8 +64,8 @@ public class TestElement {
 
 
     public void ask(){
-        System.out.println(question);
-        System.out.println("Варианты ответов: ");
+        userOutput.print(question);
+        userOutput.print("Варианты ответов: ");
         System.out.println();
         showAnswers();
 
