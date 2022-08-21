@@ -1,15 +1,28 @@
 package HW_12;
 
-public class Account {
-    private static int id=0;
-    private int number;
-    private double amount;
-    private int login_id;
+import java.util.Random;
 
-    public Account(int number, int login_id){
-        this.id=++id;
+public class Account {
+    private int number=0;
+    private double amount;
+
+    public Account(int number) {
+        this.number=number;
+        this.amount= new Random().nextInt(100000)+ new Random().nextDouble() ;
+    }
+
+
+    public void setAccount(int number){
         this.number=number;
         this.amount=0.0;
-        this.login_id=login_id;
+
+    }
+    public String toString() {
+
+        return "Номер " + number + ", сумма=" + String.format("%.2f",amount);
+    }
+
+    public void printAccount(){
+        System.out.println(number +" "+ String.format("%.2f",amount));
     }
 }

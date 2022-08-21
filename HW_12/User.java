@@ -2,18 +2,17 @@ package HW_12;
 
 import java.util.Date;
 
-public class User {
-    private static int loginId=0;
+public class User  {
+
     private String fullName;
-
+    private Account[] accounts=new Account[2];
     private Date birth;
+    int count = 0;
 
-
-    public User(String fullName, Date birth){
+    public User(String fullName, Date birth) {
         Date date = new Date();
-        this.loginId=++loginId;
-        this.fullName=fullName;
-        this.birth=birth;
+        this.fullName = fullName;
+        this.birth = birth;
     }
 
     public Date getBirth() {
@@ -24,21 +23,32 @@ public class User {
         return fullName;
     }
 
-    public boolean isUserAdult(){
+    public boolean isUserAdult() {
         Date current = new Date();
-        if (birth.getTime()-current.getTime()>=567648000000L)
+        if (birth.getTime() +567648000000L<= current.getTime())
             return true;
         return false;
     }
 
-    public void addAccountToUser(User u, int number){
-        Account acc= new Account(number, u.loginId);
+    public void addAccountToUser(Account newAccount) {
+
+        accounts[count++] = newAccount;
 
     }
+
     @Override
     public String toString() {
-         return "Клиент " + "ФИО=" + fullName + ", дата рождения=" + birth;
+        return "Клиент " + "ФИО=" + fullName + ", дата рождения=" + birth;
     }
 
+    public void printAccs() {
+        for (Account a : accounts) {
+           a.printAccount();
+        }
 
-}
+    }
+    public Account[] getAccs(){
+        return accounts;
+    }
+    }
+
