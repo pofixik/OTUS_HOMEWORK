@@ -7,20 +7,11 @@ public class User  {
     private String fullName;
     private Account[] accounts=new Account[2];
     private Date birth;
-    int count = 0;
 
     public User(String fullName, Date birth) {
         Date date = new Date();
         this.fullName = fullName;
         this.birth = birth;
-    }
-
-    public Date getBirth() {
-        return birth;
-    }
-
-    public String getFullName() {
-        return fullName;
     }
 
     public boolean isUserAdult() {
@@ -30,25 +21,26 @@ public class User  {
         return false;
     }
 
-    public void addAccountToUser(Account newAccount) {
+    @Override
+    public int hashCode() {
+        return fullName.hashCode();
+    }
 
-        accounts[count++] = newAccount;
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (this == other) return true;
+        if (getClass() != other.getClass()) return false;
 
+        User otherPerson = (User) other;
+        return this.fullName.equals(otherPerson.fullName);
     }
 
     @Override
     public String toString() {
-        return "Клиент " + "ФИО=" + fullName + ", дата рождения=" + birth;
+        return "Клиент " + "ФИО=" + fullName + ", дата рождения=" + birth +" Больше 18? " + isUserAdult();
     }
 
-    public void printAccs() {
-        for (Account a : accounts) {
-           a.printAccount();
-        }
 
-    }
-    public Account[] getAccs(){
-        return accounts;
-    }
     }
 

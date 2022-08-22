@@ -6,60 +6,66 @@ import java.util.*;
 
 
 public class HW_12 {
-    static List collectionForUser= new ArrayList<User>();
-    static List collectionForAccounts= new ArrayList<Account>();
-    static User u;
-    static int kol=100;
-    static List generateUsers(){
-        User a;
-        Account acc;
+    static int kol = 100;
+
+    private static Map<Integer, User> getPersonAccounts() {
+        Map<Integer, User> personAccounts = new HashMap<>();
         Random random = new Random();
-        for (int i=0; i<kol;i++) {
-            a=new User(generateRandomName(), generateRandomBirth());
-            collectionForUser.add(a);
-            for (int j=0; j<2;j++) {
-                acc=new Account(Integer.parseInt("4274" + random.nextInt(10000)));
-                a.addAccountToUser(acc);
-                collectionForAccounts.add(acc);
-            }
+        for (int i = 0; i < kol; i++) {
+            User user = new User(generateRandomName(), generateRandomBirth());
+            personAccounts.put((new Account(Integer.parseInt("4274" + random.nextInt(10000)))).getNumber(), user);
+
 
         }
-        return collectionForUser;
+        User userTest = new User("Karimov Vitaliy", new Date(-631152000));
+        personAccounts.put((new Account(888888888, 0.0)).getNumber(), userTest);
+        personAccounts.put((new Account(919191919, 0.0)).getNumber(), userTest);
+        return personAccounts;
     }
 
-    static Date generateRandomBirth(){
+
+    static Date generateRandomBirth() {
         Random random;
-        Date    date;
-        long    ms;
+        Date date;
+        long ms;
         random = new Random();
 
-    // -631152000000 = January 1, 1950
+        // -631152000000 = January 1, 1950
         ms = -631152000000L + (Math.abs(random.nextLong()) % (65L * 365 * 24 * 60 * 60 * 1000));
         date = new Date(ms);
         return date;
     }
 
-    static String generateRandomName(){
+    static String generateRandomName() {
         Faker faker = new Faker();
         String name = faker.name().fullName();
         return name;
     }
+
     public static void main(String[] args) {
-        generateUsers();
-     //   System.out.println(collectionForUser);
-        for (int i = 0; i < collectionForUser.size() - 1; i++) {
-            User u=(User)collectionForUser.get(i);
-            System.out.println("ФИО= "+u.getFullName()+" Дата Рождения "+ u.getBirth() +" Совершеннолетний: "+ u.isUserAdult());
-             //u.printAccs();
-            //System.out.println(collectionForUser.);
+        Map<Integer, User> personAccounts = getPersonAccounts();
+        System.out.println(personAccounts);// все созданные клиенты
+        System.out.println(personAccounts.keySet());// все созданные счета
 
+        User userTest = new User("Karimov Vitaliy", new Date(-631152000));
+        getAccounts(personAccounts,userTest);//нашли счета по клиенту
+
+        Account accTest1= new Account(888888888, 0.0);
+        Account accTest2= new Account(919191919, 0.0);
+
+        System.out.println(personAccounts.get(accTest1.getNumber()));//нашли клиента по обоим счетам
+        System.out.println(personAccounts.get(accTest2.getNumber()));
+
+    }
+
+
+    public static void getAccounts(Map<Integer, User> personAccounts, User desiredObject) {
+        Set<Map.Entry<Integer, User>> entrySet = personAccounts.entrySet();
+        for (Map.Entry<Integer, User> pair : entrySet) {
+            if (desiredObject.equals(pair.getValue())) {
+                System.out.println(pair.getKey());
+             }
         }
-        for (int i = 0; i < collectionForAccounts.size() - 1; i++) {
-            Account acc = (Account) collectionForAccounts.get(i);
-            acc.printAccount();
 
-        }
-    }}
-
-
-
+    }
+}

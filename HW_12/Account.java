@@ -11,18 +11,18 @@ public class Account {
         this.amount= new Random().nextInt(100000)+ new Random().nextDouble() ;
     }
 
-
-    public void setAccount(int number){
+    public Account(int number, double amount) {
         this.number=number;
-        this.amount=0.0;
-
+        this.amount= amount ;
     }
+    public Account() {}
+
+    public int getNumber(){
+        return number;
+    }
+
     public String toString() {
 
         return "Номер " + number + ", сумма=" + String.format("%.2f",amount);
-    }
-
-    public void printAccount(){
-        System.out.println(number +" "+ String.format("%.2f",amount));
     }
 }
