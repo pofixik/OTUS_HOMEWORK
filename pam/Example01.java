@@ -10,8 +10,8 @@ public class Example01 {
                 "123-45-67",
                 "123123");
 
-        var discount = customer.getDiscount();
-        System.out.println(discount);
+ //       var discount = customer.getDiscount();
+  //      System.out.println(discount);
 
         Customer ivanov = new Customer(
                 CustomerType.PERSONAL,
@@ -20,8 +20,8 @@ public class Example01 {
                 null,
                 null);
 
-        var discountIvanov = ivanov.getDiscount();
-        System.out.println(discountIvanov);
+     //   var discountIvanov = ivanov.getDiscount();
+     //   System.out.println(discountIvanov);
     }
 }
 
