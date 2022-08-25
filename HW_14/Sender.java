@@ -1,20 +1,14 @@
 package HW_14;
 
-
-import com.sun.jdi.connect.Transport;
-
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
 import java.util.concurrent.TimeoutException;
 
 public class Sender {
     private String URI;
     int timeout;
 
-    private void setTimeout(int timeout){
+    public void setTimeout(int timeout){
         this.timeout=timeout;
     }
 
@@ -32,38 +26,56 @@ public class Sender {
     public void sendRequest(String url,Message request)  {
         try {
             HttpURLConnection connection=(HttpURLConnection) new URL(url).openConnection();
-            checkConnection(url,connection);
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
 
-            DataOutputStream wr = new DataOutputStream (
-                    connection.getOutputStream());
-            wr.writeBytes(request.getMessageText());
-            wr.close();
+            checkConnection(url,connection, request);
+
              }
         catch (TimeoutException e) {
             throw new RuntimeException("Случился таймаут",e);
         }
-        catch (ConnectionException e) {
+
+       catch (ConnectionException e) {
             throw new RuntimeException("2.Сайт не ответил", e);
+        }
+        catch (RuntimeException e) {
+            throw new RuntimeException("3.Сайт не ответил", e);
+
         }
         catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
-    public void checkConnection(String url,HttpURLConnection connection) throws TimeoutException, ConnectionException {
+    public void checkConnection(String url,HttpURLConnection connection, Message request) throws TimeoutException, ConnectionException {
         try {
             connection.setConnectTimeout(getTimeout());
             connection.setReadTimeout(getTimeout());
             connection.setRequestMethod("POST");
+
+            Responser responser= new Responser();
+            ///ветка с try-with-resource
+             responser.readResponse(connection.getResponseCode());
             int responseCode = connection.getResponseCode();
             if (responseCode != 200) {
-                throw new ConnectionException("Resource is currently unavailable");
+                throw new ConnectionException();
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
         }
-        catch (ConnectionException e) {
-            throw new RuntimeException("1.Сайт не ответил", e);
+
+       catch (ConnectionException e) {
+         throw new RuntimeException("1.Сайт не ответил", e);
+        }
+        catch (RuntimeException e) {
+            throw new RuntimeException("Проброс ошибки", e);
+        }
+        catch (UnknownHostException e) {
+            System.out.println("Все сломано, выходим");
+            System.exit(1);
+        }
+        catch (IOException e) {
+            System.out.println(e);
         }
 
     }
