@@ -7,21 +7,33 @@ import java.util.*;
 
 public class HW_12 {
     static int kol = 100;
+    private static Map<User, User> personAccounts = new HashMap<>();
+    private static Map<Account, User> accountPersons = new HashMap<>();
 
-    private static Map<Integer, User> getPersonAccounts() {
-        Map<Integer, User> personAccounts = new HashMap<>();
-        Random random = new Random();
+
+    private static Map<User, User> setPersonAccounts() {
+
         for (int i = 0; i < kol; i++) {
-            User user = new User(generateRandomName(), generateRandomBirth());
-            personAccounts.put((new Account(Integer.parseInt("4274" + random.nextInt(10000)))).getNumber(), user);
-
+            Account a= new Account(i);
+            User user = new User(generateRandomName(), generateRandomBirth(), a);
+            personAccounts.put(user, user);
+            setAccountPersons(accountPersons, a,user);
 
         }
-        User userTest = new User("Karimov Vitaliy", new Date(-631152000));
-        personAccounts.put((new Account(888888888, 0.0)).getNumber(), userTest);
-        personAccounts.put((new Account(919191919, 0.0)).getNumber(), userTest);
+        Account newacc1= new Account(888888888);
+        Account newacc2= new Account(919191919);
+        User userTest = new User("Karimov Vitaliy", new Date(-631152000), new Account[]{newacc1, newacc2});
+        personAccounts.put(userTest, userTest);
+        accountPersons.put(newacc1, userTest);
+        accountPersons.put(newacc2, userTest);
         return personAccounts;
     }
+
+    private static Map<Account, User> setAccountPersons(Map<Account, User> accountPersons, Account a, User user) {
+        accountPersons.put(a, user);
+        return accountPersons;
+    }
+
 
 
     static Date generateRandomBirth() {
@@ -43,29 +55,25 @@ public class HW_12 {
     }
 
     public static void main(String[] args) {
-        Map<Integer, User> personAccounts = getPersonAccounts();
+        Map<User, User> personAccounts = setPersonAccounts();
+
         System.out.println(personAccounts);// все созданные клиенты
         System.out.println(personAccounts.keySet());// все созданные счета
 
         User userTest = new User("Karimov Vitaliy", new Date(-631152000));
-        getAccounts(personAccounts,userTest);//нашли счета по клиенту
+        User accountFromUser = personAccounts.get(userTest);//нашли клиента
+        accountFromUser.getAccounts();//нашли счета по клиенту
+
 
         Account accTest1= new Account(888888888, 0.0);
         Account accTest2= new Account(919191919, 0.0);
 
-        System.out.println(personAccounts.get(accTest1.getNumber()));//нашли клиента по обоим счетам
-        System.out.println(personAccounts.get(accTest2.getNumber()));
+        User userFromAccount1= accountPersons.get(accTest2);//нашли клиента по счету 1
+        User userFromAccount2= accountPersons.get(accTest1);//нашли клиента по счету 2
+        System.out.println(userFromAccount1);
+        System.out.println(userFromAccount2);
 
     }
 
 
-    public static void getAccounts(Map<Integer, User> personAccounts, User desiredObject) {
-        Set<Map.Entry<Integer, User>> entrySet = personAccounts.entrySet();
-        for (Map.Entry<Integer, User> pair : entrySet) {
-            if (desiredObject.equals(pair.getValue())) {
-                System.out.println(pair.getKey());
-            }
-        }
-
-    }
 }

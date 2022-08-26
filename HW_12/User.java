@@ -8,10 +8,29 @@ public class User  {
     private Account[] accounts=new Account[2];
     private Date birth;
 
+    public void getAccounts(){
+        for (Account a:accounts){
+            System.out.println(a);
+        }
+    }
+
     public User(String fullName, Date birth) {
         Date date = new Date();
         this.fullName = fullName;
         this.birth = birth;
+    }
+    public User(String fullName, Date birth, Account account) {
+        Date date = new Date();
+        this.fullName = fullName;
+        this.birth = birth;
+        this.accounts= new Account[]{account};
+    }
+
+    public User(String fullName, Date birth, Account[] account) {
+        Date date = new Date();
+        this.fullName = fullName;
+        this.birth = birth;
+        this.accounts= account;
     }
 
     public boolean isUserAdult() {
