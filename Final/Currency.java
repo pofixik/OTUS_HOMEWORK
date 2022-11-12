@@ -26,12 +26,16 @@ public class Currency {
     }
 
     public String readAndDefineCurrency() {
-        showAvailCurrencies();
+/*        showAvailCurrencies();
         String userCurrency = userInput.read();
         if (availCurrencies.collectionForCurrencies.contains(userCurrency.toUpperCase())) {
             userOutput.print("Вы выбрали валюту "+ userCurrency.toUpperCase());
 
         }
+        setCurrency(userCurrency);*/
+        String userCurrency = "RUB";
+        setCurrency(userCurrency);
+        System.out.println(getCurrency());
         return userCurrency;
 
     }

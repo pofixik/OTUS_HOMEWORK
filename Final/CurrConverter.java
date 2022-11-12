@@ -5,14 +5,14 @@ import java.util.Scanner;
 
 public interface CurrConverter {
 
-    default String makeUserInputFromDigitalToWords(int integerPartOfAmount, int floatPartOfAmount) {
+    default String makeUserInputFromDigitalToWords(int integerPartOfAmount, int floatPartOfAmount,String userCurrency) {
         String finalString="";
         return finalString;
     }
 
-    default String makeIntegerPartFromDigital(int rubles){
+    default String makeIntegerPartFromDigital(int amount){
 
-        return makeWordsFromDigital(rubles);
+        return makeWordsFromDigital(amount);
     }
     default String makeFloatPartFromDigital(int cents){
 
@@ -20,12 +20,6 @@ public interface CurrConverter {
     }
     default String makeWordsFromDigital(int digital){
         String wordsFromDigital="";
-        Map<Integer, String> dictSimple ;
-        Map<Integer, String> dictHundreds ;
-        Map<Integer, String> dictThousands ;
-        Map<Integer, String> dictMillions ;
-        Map<Integer, String> dictAdditional ;
-
 
         return wordsFromDigital;
     }

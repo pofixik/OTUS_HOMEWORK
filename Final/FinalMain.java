@@ -4,10 +4,12 @@ public class FinalMain {
 
 
     public static void main(String[] args) {
-        Currency preparation= new Currency();
-        //preparation.readAndDefineCurrency();//определились с валютой
-        DigitToWordConversion digitToWordConversion = new DigitToWordConversion();
+        Currency userCurrency= new Currency();
+
+        userCurrency.readAndDefineCurrency();//определились с валютой
+
+        PrepareDigitToWordConversion prepareDigitToWordConversion = new PrepareDigitToWordConversion();
         while (true)
-        digitToWordConversion.convertDigitalsToWords();
+        prepareDigitToWordConversion.convertDigitalsToWords(userCurrency.getCurrency());
     }
 }

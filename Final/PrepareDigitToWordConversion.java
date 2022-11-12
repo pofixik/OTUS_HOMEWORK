@@ -1,15 +1,16 @@
 package Final;
 
-public class DigitToWordConversion {
+public class PrepareDigitToWordConversion {
     private final UserInput userInput = new ConsoleUserInput();
     private final UserOutput userOutput = new ConsoleUserOutput();
     CollectionRuDictionary dictionaryClass=new CollectionRuDictionary();
-
+    Helper helper= new Helper();
     public int getIntegerPartOfAmount (double amount){
         return (int)amount;
     }
-    public int getFloatPartOfAmount (int amount){
-        return (int)amount%1;
+
+    public int getFloatPartOfAmount (double amount){
+        return helper.getFloatPart(amount);
     }
     public double readAmount(){
         userOutput.print("Введите сумму цифрами (для копеек используйте точку, не более двух знаков после запятой): ");
@@ -18,14 +19,15 @@ public class DigitToWordConversion {
             userOutput.print("Что-то не то. Попробуйте еще раз");
             userAmountInDigits = userInput.read();
         }
-        return Double.parseDouble(userAmountInDigits);
+        return  Double.parseDouble(userAmountInDigits);
     }
 
-    public void convertDigitalsToWords(){
+    public void convertDigitalsToWords(String userCurrency){
         dictionaryClass.initializeDictionaries();
-        RURubConverter ruConverter= new RURubConverter();
+        RUConverter ruConverter= new RUConverter();
         double d=readAmount();
-        userOutput.print(ruConverter.makeUserInputFromDigitalToWords(getIntegerPartOfAmount(d),  getFloatPartOfAmount((int) d)));
+        System.out.println(d);
+        userOutput.print(ruConverter.makeUserInputFromDigitalToWords(getIntegerPartOfAmount(d),  getFloatPartOfAmount(d),  userCurrency));
 
     }
 

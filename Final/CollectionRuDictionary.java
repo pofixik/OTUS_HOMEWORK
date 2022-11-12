@@ -11,9 +11,10 @@ public class CollectionRuDictionary {
     private static Map<Integer, String> ruHundredsDictionary = new HashMap<>();
     private static Map<Integer, String> ruThousandsDictionary = new HashMap<>();
     private static Map<Integer, String> ruMillionsDictionary = new HashMap<>();
-    private static Map<Integer, String> ruCentsDictionary = new HashMap<>();
+    private static Map<Integer, String> ruKopeykaDictionary = new HashMap<>();
     private static Map<Integer, String> ruRublesDictionary = new HashMap<>();
-
+    private static Map<Integer, String> ruDollarsDictionary = new HashMap<>();
+    private static Map<Integer, String> ruCentsDictionary = new HashMap<>();
     public  Map<Integer, String> getRuNumbersDictionary() {
         return ruNumbersDictionary;
     }
@@ -36,18 +37,23 @@ public class CollectionRuDictionary {
         return ruMillionsDictionary;
     }
 
+    public  Map<Integer, String> getRuKopeykaDictionary() {
+        return ruKopeykaDictionary;
+    }
+    public  Map<Integer, String> getRuDollarsDictionary() {
+        return ruDollarsDictionary;
+    }
     public  Map<Integer, String> getRuCentsDictionary() {
         return ruCentsDictionary;
     }
-
     public void initializeDictionaries() {
         ruSpecificNumbersDictionary = Map.ofEntries(
                 entry(1, "одна"),
                 entry(2, "две")
 
         );
-        ruCentsDictionary = Map.ofEntries(
-                entry(0, "копеек"),
+        ruKopeykaDictionary = Map.ofEntries(
+                entry(5, "копеек"),
                 entry(1, "копейка"),
                 entry(2, "копейки")
         );
@@ -55,6 +61,16 @@ public class CollectionRuDictionary {
                 entry(1, "рубль"),
                 entry(2, "рубля"),
                 entry(5, "рублей")
+        );
+        ruDollarsDictionary = Map.ofEntries(
+                entry(1, "доллар"),
+                entry(2, "доллара"),
+                entry(5, "долларов")
+        );
+        ruCentsDictionary = Map.ofEntries(
+                entry(1, "цент"),
+                entry(2, "цента"),
+                entry(5, "центов")
         );
         ruMillionsDictionary = Map.ofEntries(
                 entry(1, "миллион"),

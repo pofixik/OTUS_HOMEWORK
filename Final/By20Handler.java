@@ -25,8 +25,7 @@ public class By20Handler {
             if (dig == 2) {
                 russianVersion = dictAdd.get(2);
             }
-        System.out.println("test3" + " "+ russianVersion);
-        return russianVersion;
+         return russianVersion;
     }
 
 }
