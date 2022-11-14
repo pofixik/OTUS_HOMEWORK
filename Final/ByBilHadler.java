@@ -1,6 +1,6 @@
 package Final;
 
-import java.util.Map;
+import java.math.BigInteger;
 
 public class ByBilHadler {
      Helper helper = new Helper();
@@ -9,8 +9,8 @@ public class ByBilHadler {
     By1000Handler by1000Handler= new By1000Handler();
 
     public String handleProcess(int digital) {
-        int millions = helper.decideNumber(digital, 1000000);
-        int thousands = helper.decideNumber(digital-millions*1000_000, 1000);
+        int millions = helper.decideNumber((digital), 1000000);
+        int thousands = helper.decideNumber((digital-millions*1000_000), 1000);
         int hundr=digital-(millions*1000000+thousands*1000);
 
         String wordsFromDigital = helper.addStringForMillions(millions, makeFirstPart(millions));

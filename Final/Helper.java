@@ -1,5 +1,6 @@
 package Final;
 
+import java.math.BigInteger;
 import java.util.Map;
 
 public class Helper {
@@ -76,6 +77,7 @@ public class Helper {
         } else if (threeLastStr.equals(".")) {
             returnStatement = twoLastStr + total2.charAt(total2.length() - 1);
         }
+        System.out.println(returnStatement);
         return Integer.parseInt(returnStatement);
 
         }

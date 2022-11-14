@@ -1,6 +1,6 @@
 package Final;
 
-import java.util.Map;
+import java.math.BigInteger;
 
 public class ByMilHandler {
 
@@ -11,7 +11,7 @@ public class ByMilHandler {
 
 
     public String handleProcess(int digital) {
-        int thousands = helper.decideNumber(digital, 1000);
+        int thousands = helper.decideNumber((digital), 1000);
 
         String wordsFromDigital = helper.addStringForThousand(thousands, makeFirstPart(thousands));
         if ((digital-thousands*1000)!=0)
