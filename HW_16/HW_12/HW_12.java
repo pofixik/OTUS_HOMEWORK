@@ -1,4 +1,4 @@
-package HW_12;
+package HW_16.HW_12;
 
 import com.github.javafaker.Faker;
 
